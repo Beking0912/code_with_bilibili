@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>arrow-function2</title>
+  </head>
+  <body>
+    <script>
+      const people = {
+        name: "beking",
+        hobbies: ["reading", "running", "coding"],
+        printHobbies: function() {
+          console.log(this); // 这里的 this 指向 people
+          this.hobbies.map(function(hobby) {
+            // 这个函数是 map 的回调函数，是一个独立函数，不是作为对象的方法调用，也没有通过 call apply bind 改变 this 值
+            // 所以此处的 this 应该指向 window、global，或在严格模式下指向 undefined
+            console.log(`${this.name} loves ${hobby}`); // 并没有输出 beking，这里的 this 指向 window
+          });
+          // JS 中的 this 值是在运行时才绑定的，printHobbies 方法是由 people 调用的所以指向 people
+        }
+      };
+
+      people.printHobbies();
+
+      // 成功的方法一
+      const people2 = {
+        name: "beking",
+        hobbies: ["reading", "running", "coding"],
+        printHobbies: function() {
+          var self = this;
+          this.hobbies.map(function(hobby) {
+            console.log(`${self.name} loves ${hobby}`);
+          });
+        }
+      };
+
+      // 成功的方法二 (ES6)
+      const people2 = {
+        name: "beking",
+        hobbies: ["reading", "running", "coding"],
+        printHobbies: function() {
+          this.hobbies.map(hobby => {
+            // 这个 this 指向的是 people，所以下面的箭头函数也是指向 people
+            // 箭头函数没有自己的 this 值，this 值是继承自父作用域的
+            // 箭头函数的 this 是词法作用域，是在定义时就被指定，也不会因为调用方法的改变而改变
+            console.log(`${this.name} loves ${hobby}`);
+          });
+        }
+      };
+    </script>
+  </body>
+</html>
