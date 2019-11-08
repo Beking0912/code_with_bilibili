@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>let-const-use-case2</title>
+  </head>
+  <body>
+    <script>
+      console.log(color); // ReferenceError
+      let color = "yellow";
+      // 临时性死区：在 ES2015 中，let也是会提升到块级作用域的顶部，但在声明之前引用该变量会报错
+      // const 也同样如此
+
+      // 默认使用 const
+      // 当变量需要重新绑定或更新时 使用 let
+      // ES6 中尽量不使用 var
+    </script>
+  </body>
+</html>
