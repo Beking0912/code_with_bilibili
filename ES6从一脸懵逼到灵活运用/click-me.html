@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>click-me</title>
+    <style>
+      .zoom {
+        font-size: 40px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 100px;
+        color: red;
+        height: 100px;
+        width: 300px;
+        border-radius: 100px;
+        background-color: skyblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="zoom">Click Me</div>
+    <script>
+      /**
+       * （1）作为构造函数，一个方法需要绑定到对象
+       **/
+      const Person = (name, points) => {
+        // 报错的原因：箭头函数没有将 this 绑定到 Beking 对象上去
+        this.name = name;
+        this.points = points;
+      };
+      const Beking = new Person("beking", 6);
+      // 使用 new 来创建一个实例，四个步骤：
+      // 1. 生成一个新的对象
+      // 2. 把函数中的 this 值指向新生成的这个对象
+      // 3. 把这个对象绑定它的原型对象
+      // 4. 返回这个新对象
+
+      Person.prototype.updatePoints = () => {
+        // 给 Person 添加一个原型方法
+        this.points++;
+        console.log(this.points);
+        // 返回 NaN 的原因：这里的 this 值指向的是 window
+      };
+
+      /**
+       * （2）当你真的需要 this 的时候
+       **/
+      const button = document.querySelector(".zoom");
+      button.addEventListener("click", () => {
+        this.classList.add("in");
+        // 报错的原因：这里的 this 值指向 window
+        setTimeout(() => {
+          this.classList.remove("in");
+        }, 2000); // 这里的 this 值取自父作用域的 this 的指向
+      });
+
+      /**
+       * （3）需要使用 arguments 对象
+       **/
+      const sum = () => {
+        // 返回所有参数的和
+        return Array.from(arguments).reduce(
+          // Array.from 是将 arguments 这个类数组对象转化成真正的数组
+          // 报错的原因：箭头函数中没有 arguments 对象
+          (prevSum, value) => prevSum + value,
+          0
+        );
+      };
+      const sum2 = function(...args) {
+        return args.reduce((prevSum, value) => prevSum + value, 0);
+      };
+    </script>
+  </body>
+</html>
