@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>default-arguments</title>
+  </head>
+  <body>
+    <script>
+      function multiply(a = 3, b = 4) {
+        //   a = a || 3;
+        //   b = b || 4;  以前是这样设置默认值的
+        return a * b;
+      }
+
+      multiply(); // 以默认值来计算输出
+      multiply(3); // 第一个参数为 3，第二个参数使用默认值
+      multiply(undefined, 3); // 第一个参数显式地传 undefined
+      multiply(null, 2); // 传入 null 不会使用默认值 返回 0
+
+      // 判断 a 是否是 undefined：typeof a === 'undefined'
+    </script>
+  </body>
+</html>
