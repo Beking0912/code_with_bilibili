@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>rest-params</title>
+  </head>
+  <body>
+    <script>
+      // 剩余参数
+      function sum(...numbers) {
+        return numbers.reduce((prev, curr) => prev + curr, 0);
+      }
+      sum(1, 2, 3, 4);
+
+      // 应用场景一：对函数参数的处理
+      function converCurrency(rate, ...amounts) {
+        return amounts.map(amounts => amounts * rate);
+      }
+
+      // 应用场景二：用于变量的解构
+      const player = ["beking", 123123, 2.2, 3.5, 6.4];
+      const [name, id, ...scores] = player;
+
+    </script>
+  </body>
+</html>
