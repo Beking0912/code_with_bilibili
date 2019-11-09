@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>post-comments</title>
+    <style>
+      .container {
+        margin-top: 100px;
+        display: flex;
+        justify-content: center;
+      }
+      .add-comment {
+        display: flex;
+        flex-direction: column;
+      }
+      .comment-text {
+        height: 200px;
+        width: 400px;
+        font-size: 20px;
+      }
+      button {
+        margin-top: 20px;
+        height: 50px;
+        width: 100px;
+        font-size: 20px;
+      }
+      .comment-header {
+        color: blue;
+        font-size: 24px;
+      }
+      .comment-body {
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <form class="add-comment">
+        <textarea class="comment-text"></textarea>
+        <button>Submit</button>
+        <div class="comment"></div>
+      </form>
+    </div>
+    <script src="https://cdn.bootcss.com/dompurify/1.0.3/purify.js"></script>
+    <script>
+      const addCommentForm = document.querySelector(".add-comment");
+      const textarea = document.querySelector(".comment-text");
+      const commentDiv = document.querySelector(".comment");
+      const user = "Beking";
+
+      function sanitize(strings, ...values) {
+        const dirty = strings.reduce(
+          (prev, curr, i) => `${prev}${curr}${values[i] || ""}`,
+          ""
+        );
+        return DOMPurify.sanitize(dirty);
+      }
+
+      // 容易收到 XSS 攻击，即跨站脚本攻击
+      // 用户通过在输入中嵌入非法字符串或脚本，来窃取用户 cookie、session 等
+      // 解决方案：使用 DOMPurify 对用户输入进行净化
+      addCommentForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        const newComment = textarea.value.trim();
+        if (newComment) {
+          commentDiv.innerHTML = sanitize`
+            <div class='comment-header'>${user}</div>
+            <div class='comment-body'>${textarea.value}</div>
+            `;
+          textarea.value = "";
+        }
+      });
+    </script>
+  </body>
+</html>
