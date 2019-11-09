@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>array-from-and-of</title>
+  </head>
+  <body>
+    <ul>
+      <li>Go Shopping</li>
+      <li>Read Books</li>
+      <li>Watch TV</li>
+    </ul>
+    <script>
+      // .from() .of() 不是数组原型上的方法
+
+      // Array.form()
+      // Array.form() 用于把一个类数组对象(拥有length属性的对象)
+      // 或可遍历对象(部署了iterator接口的对象)转换为真正的数组
+      const todos = document.querySelectorAll("li");
+      console.log(todos);
+      // todos 的原型是 NodeList 而不是数组，没有 map 方法
+      const names = Array.from(todos).map(todo => todo.textContent);
+
+      // 第二个参数传方法，可简化成如下
+      const names2 = Array.from(todos, todo => todo.textContent);
+
+      // arguments 的原型是 Object，没有 reduce 方法
+      function sum() {
+        return Array.from(arguments).reduce((prev, curr) => prev + curr, 0);
+      }
+
+      // Array.of()
+      // Array.of() 是弥补 Array 的不足，不管传入多少参数返回的都是相应数组(一致性)
+      // new Array(5) 返回 [undefined * 5]
+      // new Array(2, 3, 4) 返回 [2, 3, 4] 传入参数个数不同，行为不同
+    </script>
+  </body>
+</html>
