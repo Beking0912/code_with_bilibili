@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>tagged-template-string</title>
+    <style>
+      .highlight {
+        padding: 2px 5px;
+        background: cyan;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      function highlight(strings, ...values) {
+        const highlighted = values.map(
+          value => `<span class='highlight'>${value}</span>`
+        );
+
+        // let str = "";
+        // strings.forEach((string, i) => {
+        //   str += `${string}${highlighted[i] || ""}`;
+        // });
+        // return str;
+
+        return strings.reduce(
+          // 字符串拼接也可以使用数组的 reduce 方法
+          (prev, curr, i) => `${prev} ${curr} ${highlighted[i] || ""}`,
+          ""
+        );
+      }
+      const user = "Beking";
+      const topic = "Learn to user markdown";
+      const sentence = highlight`${user} has commented on you topic ${topic}`;
+      // 如果模版字符串是以变量开头或结尾，strings 的首尾会多两个空字符串
+      // 上面方法 highlighted[i] 输出结果最后会带一个 undefined，需要设置默认值
+
+      document.body.innerHTML = sentence;
+    </script>
+  </body>
+</html>
