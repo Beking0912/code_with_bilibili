@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>template-string</title>
+  </head>
+  <body>
+    <script>
+      const person = "Beking";
+      const age = 5;
+      const sentence = person + "is" + age + "years old.";
+      const sentence2 = `${person} is ${age} years old.`;
+      const template = `
+        <div>${person}</div>
+      `.trim();
+    </script>
+  </body>
+</html>

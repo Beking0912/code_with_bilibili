@@ -8,15 +8,15 @@
   </head>
   <body>
     <script>
-      for (var i = 0; i < 10; i++) {
+      for (var i = 0; i < 10; i++) { // var 是函数作用域
         setTimeout(function() {
-          console.log(`i:${i}`); // ( i:10 )*10
+          console.log(`i:${i}`); // ( i:10 )*10 输出的时候已经做完循环
         }, 1000);
       }
 
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < 10; i++) { // let 是块级作用域
         setTimeout(function() {
-          console.log(`i:${i}`); // ( i:0~9 )
+          console.log(`i:${i}`); // ( i:0~9 ) // 在这个大括号内都有用
         }, 1000);
       }
       
