@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>for-of-loop-examples</title>
+  </head>
+  <body>
+    <script>
+      const fruits = ["apple", "banana", "orange", "mango"];
+
+      // for-of 可以用来遍历可迭代对象
+      // 可迭代对象：部署了 iterator 遍历器接口或定义了 Symbol.iterator 方法的数据结构
+      // JS 给很多内置数据结构提供了内置遍历器接口，例如 Array、Map
+      for (let fruit of fruits) {
+        console.log(fruit);
+      }
+
+      // 可以通过 fruits.entries() 查看到遍历器接口
+      // iterator.next() 方法返回对象 {value:{[0,apple],done:false}}
+      for (let fruit of fruits.entries()) {
+        console.log(fruit); // [0, 'apple'] 可以同时得到索引值
+        console.log(fruit[1]);
+      }
+
+      // for-of 可以用于 Array、String、Map、Set、arguments、nodeList
+      // for-of 目前还不支持对象
+      for (let [index, fruit] of fruits.entries()) {
+        console.log(`${fruit} ranks ${index + 1} in my favorite fruits.`);
+      }
+
+      function sum() {
+        console.log(arguments); // __proto__:Object
+      }
+      sum(10, 22, 324, 34, 22, 4);
+      
+    </script>
+  </body>
+</html>
