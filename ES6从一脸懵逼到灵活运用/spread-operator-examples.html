@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>array-from-and-of</title>
+  </head>
+  <body>
+    <ul>
+      <li>Go Shopping</li>
+      <li>Read Books</li>
+      <li>Watch TV</li>
+    </ul>
+    <script>
+      // 由原先的 NodeList 转换为 Array
+      const todos = [...document.querySelectorAll("li")];
+      const names = todos.map(todo => todo.textContent);
+
+      // 扩展对象的属性
+      const favorites = {
+        color: ["yellow", "blue"],
+        fruits: ["banana", "mongo"]
+      };
+      const shoppingList = ["milk", ...favorites.fruits];
+    </script>
+  </body>
+</html>
