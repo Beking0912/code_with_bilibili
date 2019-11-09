@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>destructuring-objects</title>
+  </head>
+  <body>
+    <script>
+      const Beking = {
+        name: "beking",
+        age: "22",
+        family: {
+          mother: "mom",
+          father: "dad",
+          brother: "bro"
+        }
+      };
+
+      // const name = Beking.name;  ES6 之前的方式
+      // const age = Beking.age;
+
+      const { name, age } = Beking; // ES6 的方式
+      const { mother, father: f, brother, sister='have no sister' } = Beking.family; // 对象解构可以嵌套
+      // 如果在之前已经有相同名字的变量被申明，可以在对象解构时进行重命名
+      // 重命名的流程：
+      // 1. 申明 f 变量
+      // 2. 在 Beking.family 中找到属性名为 father 的值
+      // 3. 赋值给 f
+
+      // 当取出的属性不存在于该对象，回滚到默认值，否则返回 undefined
+      // 必须是明确等于 undefined 才会使用默认值，null、false、0 等都是按原值返回
+    </script>
+  </body>
+</html>
