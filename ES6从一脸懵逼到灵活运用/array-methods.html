@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>array-methods</title>
+  </head>
+  <body>
+    <script>
+      const inventory = [
+        { name: "apples", quantity: 2 },
+        { name: "bananas", quantity: 0 },
+        { name: "pears", quantity: 12 }
+      ];
+
+      // .find(element, index, array)
+      // .find() 用于寻找数组中某一个满足条件的元素，接受函数作为参数
+      // 找到满足条件的第一个元素就立马返回，不会执行后续操作
+      // 相对于 forEach 性能更优，相对于 for-of 语法更简单
+      const bananas = inventory.find(fruit => fruit.name === "bananas");
+
+      // .findIndex(element, index, array)
+      // 找元素索引
+      const bananasIndex = inventory.findIndex(fruit => fruit.name === "bananas");
+
+      // .some()
+      // 数组中某一个元素满足条件即返回 true，并不会执行后续操作
+      const isEnough = inventory.some(fruit => fruit.quantity > 0);
+
+      // .every()
+      // 数组中每一个元素都满足条件才返回 true
+      const isEnough = inventory.every(fruit => fruit.quantity > 0);
+
+    </script>
+  </body>
+</html>
