@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>new-string-methods</title>
+  </head>
+  <body>
+    <script>
+      const id = "330281199800001122";
+      const fan = "Hello World!";
+
+      // .startsWith()
+      id.startsWith("33"); // true 是否是 33 开头
+      id.startsWith("1998", 6); // 从第六位开始是否是 1998 开头
+      fan.startsWith("Hello"); // true
+      fan.startsWith("hello"); // false 该方法是大小写敏感的
+
+      // .endsWith() 用法与上类似
+
+      // .includes()
+      fan.includes("Hello"); // true 等同于：fan.indexOf('Hello') !== -1
+      fan.includes("Hello", 6); // 从第六位开始是否包含该字符串
+
+      // .repeat()
+      "哈".repeat(10); // 重复 10 遍哈
+      const heading = `${"=".repeat(5)} ${fan} ${"=".repeat(5)}`; // 美化字符串
+      function padder(str, len = 25) {
+        // 实现右对齐
+        return `${" ".repeat(Math.max(len - str.length, 0))}${str}`;
+      }
+    </script>
+  </body>
+</html>
