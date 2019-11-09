@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>destructuring-array</title>
+  </head>
+  <body>
+    <script>
+      const numbers = ["one", "two", "three", "four"];
+
+      // const [one, two] = numbers;  获取数组第一第二个位置的值
+      // const [one, , three] = numbers;  只想获取第一第三个位置的值，需要空出中间元素的位置
+      const [one, ...others] = numbers; // 后几位会组成新数组赋值给 others
+      // const [one, ...others, three] = numbers; 数组的 rest 参数必须放最后
+
+      // 对象解构常用场景之一：交换变量的值
+      let a = 10;
+      let b = 20;
+      [a, b] = [b, a];
+      
+    </script>
+  </body>
+</html>
