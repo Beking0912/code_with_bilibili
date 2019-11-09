@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>spread-operator-intro</title>
+  </head>
+  <body>
+    <script>
+      const youngers = ["mars", "jack", "lily"];
+      const olders = ["james", "martin", "john"];
+
+      const all = [...youngers,'mary',...olders]
+      const currentAll = all;
+      // 当 currentAll 改变时 all 会随之改变
+      // 原因：currentAll 复制的是 all 数组的索引，两个数组指向的是同一个地方
+      // 为了避免以上情况，使用以下写法：
+      const currentAll2 = [].concat(all);
+      const currentAll3 = [...all];
+    </script>
+  </body>
+</html>
