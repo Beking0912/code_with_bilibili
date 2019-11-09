@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>template-string-examples</title>
+    <style>
+      .todo {
+        width: 250px;
+        background-color: yellow;
+        display: flex;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      const Beking = {
+        name: "beking",
+        date: "2019-11-08",
+        todos: [
+          { name: "Go to Store.", completed: false },
+          { name: "Reading Books.", completed: true },
+          { name: "Running.", completed: true }
+        ]
+      };
+
+      // 倾向于将部分内容抽象出来包装成一个函数
+      function renderTodos(todo) {
+        // 可以在模版字符串中使用三元表达式
+        return `
+            <ul>
+                ${Beking.todos
+                  .map(
+                    todo =>
+                      `<li>${todo.name} ${todo.completed ? "done" : "no"}</li>`
+                  )
+                  .join("")} 
+            </ul>`;
+      }
+
+      // 模版字符串是可以嵌套使用的
+      // map 的结果是数组，所以输出结果之间有逗号，需要用 join("")
+      const template = `
+            <h2>${Beking.name}</h2>
+            <div class='todo'> ${renderTodos(Beking.todos)}</div>
+            <h2>${Beking.date}</h2>`;
+
+      document.body.innerHTML = template;
+    </script>
+  </body>
+</html>
