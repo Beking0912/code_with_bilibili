@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>for-in-loop</title>
+  </head>
+  <body>
+    <script>
+      const fruits = ["apple", "banana", "orange", "mango"];
+
+      // 遍历方式一 缺点：不能以变量的方式获取一个对象 必须是 fruits[i]
+      for (let i = 0; i < fruits.length; i++) {
+        console.log(fruits[i]);
+      }
+
+      // 遍历方式二 缺点：不能终止或跳过
+      fruits.forEach(fruit => {
+        // if (fruit === 'apple') break; 会报错
+        console.log(fruit);
+      });
+
+      // 遍历方式三 缺点：遍历的是对象上的可枚举属性，加在原型对象上的属性也会被遍历出来
+      Array.prototype.first = function() {
+        return this[0];
+      };
+      fruits.dec = 'good';
+      for (let index in fruits) {
+        console.log(fruits[index]);
+      }
+
+      // 遍历方式四 ES6 支持 break、continue
+      for (let fruit of fruits) {
+        console.log(fruit);
+      }
+    </script>
+  </body>
+</html>
