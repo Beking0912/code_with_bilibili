@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>promise-example</title>
+  </head>
+  <body>
+    <script>
+      const usersPromise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve(["apple", "banana", "pear"]);
+        }, 2000);
+      });
+
+      const moviesPromise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve({ name: "okk", rating: 100, year: 2019 });
+        }, 500);
+      });
+
+      // .all() 当所有的 promise 都完成后再调用后续方法，执行顺序与数组前后一致
+      Promise.all([usersPromise, moviesPromise])
+        .then(res => {
+          const [users, movies] = res;
+        })
+        .catch(Err => {
+          console.log(err);
+        });
+
+        // .race() 由第一个返回的 promise 结果决定
+        Promise.race([usersPromise, moviesPromise])
+        .then(res => {
+          const [users, movies] = res;
+        })
+        .catch(Err => {
+          console.log(err);
+        });
+
+    </script>
+  </body>
+</html>
