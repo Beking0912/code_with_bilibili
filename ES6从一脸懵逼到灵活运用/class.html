@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>class</title>
+  </head>
+  <script>
+    // 函数方法存在提升，但 class 不存在函数提升
+    // 只能通过 new 关键字来调用一个类
+
+    let methodName = "info2";
+    class User {
+      // 通过类的声明来定义一个类
+      constructor(name, email) {
+        // 构造函数
+        this.name = name;
+        this.age = age;
+        this.githubName = githubName;
+      } // ES6 的定义中此处不可以加逗号，否则报错
+
+      info() {
+        console.log(`My name is ${this.name}, I'm ${this.age} years old.`);
+      }
+
+      [methodName]() {
+        // 属性名可以通过计算属性来定义
+        console.log(`My name is ${this.name}, I'm ${this.age} years old.`);
+      }
+
+      static description() {
+        console.log("ok");
+      }
+
+      set github(value) {
+        this.githubName = value;
+      }
+
+      get github() {
+        return `my github is ${githubName}`;
+      }
+    }
+
+    const person = new User("jack", 20, "ok");
+    person.info();
+  </script>
+</html>
