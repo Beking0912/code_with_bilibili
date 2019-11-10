@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>iterator</title>
+  </head>
+  <body>
+    <script>
+      // 遍历器是一个有 next() 方法的对象
+      const colors = ["red", "blue", "green"];
+
+      const iterator = colors[Symbol.iterator]();
+      iterator.next();
+
+      // ES6 中三种集合对象：Array、Map、Set
+
+      colors.entries(); // 对于数组：返回一个遍历器
+      colors.keys(); // 返回索引值
+      colors.values(); // 返回与 for-of 相同，元素的值
+
+      // 手写一个遍历器
+      Array.prototype.values = function() {
+        let i = 0; // 记录当前元素的位置
+        let items = this;
+        return {
+          next() {
+            const done = i >= items.length; // 遍历是否已经结束
+            const value = done ? undefined : items[i++]; // 当前元素的值
+            return {
+              value,
+              done
+            };
+          }
+        };
+      };
+    </script>
+  </body>
+</html>
