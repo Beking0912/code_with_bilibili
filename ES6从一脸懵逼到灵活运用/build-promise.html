@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>build-promise</title>
+  </head>
+  <body>
+    <script>
+      const p = new Promise((resolve, reject) => {
+        resolve("successful"); // 成功则返回 successful
+        setTimeout(() => {
+          reject("find a error"); // 2s 后返回一个 error，但错误定位在 A 行
+          reject(Error("find a error~")); // 这样写报错会定位在这一行
+        }, 2000);
+      });
+
+      p.then(data => {
+        console.log(data);
+      }).catch(err => {
+        console.log(err); // A 行
+      });
+    </script>
+  </body>
+</html>
