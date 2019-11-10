@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>proxy-examples</title>
+  </head>
+  <body>
+    <script>
+      // 应用场景一：格式化
+      const numberHandler = {
+        set(target, key, value) {
+          target[key] = value.match(/[0-9]/g).join("");
+        },
+        get(target, key) {
+          return target[key].replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
+        }
+      };
+      const number = new Proxy({}, numberHandler);
+
+      // 应用场景二：保护用户输入，避免属性名重复
+      const safeHandler = {
+        set(target, key, value) {
+          const likeKey = Object.keys(target).find(
+            k => k.toLowerCase() === key.toLowerCase()
+          );
+          if (!(key in target) && likeKey) {
+            throw new Error(
+              `already have a property ${key} but with the case of ${likeKey}`
+            );
+            target[key] = value;
+          }
+        }
+      };
+      const safetyProxy = new Proxy({ id: 2 }, safeHandler);
+    </script>
+  </body>
+</html>
