@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>set</title>
+  </head>
+  <body>
+    <script>
+      // Set 中的元素都是唯一的
+      // 与数组的不同之处：不能通过索引获取元素
+
+      const colors = new Set();
+      colors.add("red");
+      colors.size; // 1
+      colors.delete("red"); // true
+      colors.has("red");
+      colors.clear();
+      colors.values();
+
+      // Set 的遍历方式一
+      for (let color of colors) {
+        console.log(color);
+      }
+
+      // Set 的遍历方式二
+      colors.forEach((item, key, ownSet) => {
+        console.log(item, key, ownSet);
+      });
+
+      // 用于数组去重
+      const numbers = new Set([1, 2, 3, 4, 4, 3, 5]);
+      const uniqueNumbers = [...numbers];
+    </script>
+  </body>
+</html>
