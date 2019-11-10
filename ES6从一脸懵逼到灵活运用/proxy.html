@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>proxy</title>
+  </head>
+  <body>
+    <script>
+      const person = { name: "jack", age: 20 };
+
+      // Proxy(target, handler)
+      // 可以用来重新定义对象的一些方法
+      const personProxy = new Proxy(person, {
+        get(target, key) {
+          console.log("name:", target[key]);
+        },
+        set(target, key, value) {
+          if (typeof value === "string") {
+            target[key] = value.trim();
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
