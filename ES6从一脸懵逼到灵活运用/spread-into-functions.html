@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>spread-into-function</title>
+  </head>
+  <body>
+    <script>
+      const fruit = ["apple", "banana", "pear"];
+      const newFruit = ["orange", "mongo"];
+
+      fruit.push(newFruit); // 这种方式追加的是一整个数组，改变原数组
+      fruit.push(...newFruit); // 使用扩展运算符
+      fruit.push.apply(fruit, newFruit); // 把后一个数组的值依次push进前一个数组，使前一个数组发生改变，并且只能两个数组之间发生合并
+
+      const dateFields = [2019, 2, 3];
+      const date = new Date(dateFields[0], dateFields[1], dateFields[2]); // 原方法
+      const date2 = new Date(...dateFields); // 使用扩展运算符
+    </script>
+  </body>
+</html>
