@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>extending-array</title>
+  </head>
+  <body>
+    <script>
+      // ES6 之前的继承机制：在子类构造函数内部，首先是由子类创建 this 的值。
+      // 即子类构造器内部的 this 值是指向 myArray 的实例
+      // 然后再调用基类的构造函数，Array 的其他属性会修饰 this 的值
+
+      // ES6 中 super() 创建的 this 值指向的是基类 Array
+      // 然后子类 myArray 在此基础上修改 this 值
+      // 因此这里的 this 是可以访问基类的各个功能的，而 ES6 之前不可以
+      class myArray extends Array {
+        constructor() {
+          super();
+        }
+      }
+    </script>
+  </body>
+</html>
