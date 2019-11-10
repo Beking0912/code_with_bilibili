@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>using-gengerator-for-ajax-control</title>
+  </head>
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.min.js"></script>
+    <script>
+      let userName;
+      const usersPromise = axios.get("https://api.github.com/users");
+
+      usersPromise
+        .then(res => {
+          userName = res.data[0].login;
+          return axios.get(`https://api.github.com/users/${userName}/repos`);
+        })
+        .then(res => {
+          console.log(res.data);
+        })
+        .catch(err => {
+          console.error(err);
+        });
+
+      // 使用 generate 实现以上代码
+      function ajax(url) {
+        axios.get(url).then(res => userGen.next(res.data));
+      }
+
+      function* steps() {
+        const users = yield ajax("https://api.github.com/users");
+        const firstUser = yield ajax(
+          `https://api.github.com/users/${users[0].login}`
+        );
+        const followers = yield ajax(firstUser.followers_url);
+      }
+
+      const userGen = steps();
+      userGen.next();
+    </script>
+  </body>
+</html>
