@@ -14,6 +14,17 @@
         const people=new Map();
         people.set('jack',23);
 
+        // Map 和 WeakMap 区别：
+        // WeakMap 没有 size 属性，不能循环，没有 clear 方法，key 必须是对象
+        // WeakMap 垃圾回收机制
+        const aMap = new Map();
+        const aWeakMap = new WeakMap();
+        aMap.size; // 1
+        aWeakMap.size; // undefined
+
+        // 1. key 是对象时，使用 WeakMap
+        // 2. 当数据不可用之后，相关的引用都会被自动回收，达到内存优化时，使用 WeakMap
+        // 3. 当需要数据循环或需要获取数量时，使用 Map
     </script>
 </body>
 </html>
