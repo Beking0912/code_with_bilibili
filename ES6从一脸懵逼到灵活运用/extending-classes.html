@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>extending-classes</title>
+  </head>
+  <body>
+    <script>
+      class Animal {
+        constructor(name) {
+          this.name = name;
+          this.belly = [];
+        }
+
+        eat(food) {
+          this.belly.push(food);
+        }
+      }
+
+      // ES5 的写法：
+      function Dog(name, age) {
+        Animal.call(this, name, age); // 先调用基类的构造函数
+        this.name = name;
+        this.age = age;
+      }
+
+      Dog.prototype = new Animal(); // 把 Dog 的原型对象指向了一个 Animal 实例
+      Dog.prototype.constructor = Dog; // 原型对象上的 constructor 仍然指向 Dog
+
+      // ES6 的写法：
+      class Dog extends Animal {
+        constructor(name, age) {
+          super(name); // super() 可以完成前面三句的操作
+          this.age = age;
+        }
+
+        bark() {
+          console.log(`bark bark~`);
+        }
+      }
+    </script>
+  </body>
+</html>
