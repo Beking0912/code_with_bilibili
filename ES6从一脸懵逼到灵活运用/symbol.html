@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>symbol</title>
+  </head>
+  <body>
+    <script>
+      const peter = Symbol("peter"); // 生成唯一标志，不可遍历
+
+      const classRoom = {
+        mary: { grade: 85, gender: "female" },
+        mary: { grade: 87, gender: "female" }, // 重名会覆盖前一个
+
+        [Symbol("mary")]: { grade: 85, gender: "female" }, // 计算属性写法
+        [Symbol("mary")]: { grade: 87, gender: "female" } // 避免覆盖
+      };
+
+      const sym1 = Object.getOwnPropertySymbols(classRoom); // 通过 getOwnPropertySymbols 获取
+      const sym2 = Object.getOwnPropertySymbols(classRoom).map(
+        sym => classRoom[sym]
+      ); // 正确写法，必须通过 [sym] 获取
+      const sym3 = Object.getOwnPropertySymbols(classRoom).map(
+        sym => classRoom.sym
+      ); // 错误写法，等同于 classRoom['sym']
+    </script>
+  </body>
+</html>
