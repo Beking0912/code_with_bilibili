@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>weak-set</title>
+  </head>
+  <body>
+    <script>
+      // 元素只能是对象
+      // 不能通过 for-of 遍历
+      // 没有 forEach 方法
+      // 没有 clear 方法
+      // 有自动清理的机制，可以避免内存泄漏
+
+      const people = new WeakSet([jelly, jack]);
+
+      const peopleArr = [jelly, jack];
+      console.log(peopleArr);
+      jack = null;
+      console.log(peopleArr); // 此处输出时 jack 还在
+      // 已经删除 jack 但数组中还存在对它的引用，这是内存泄漏
+    </script>
+  </body>
+</html>
