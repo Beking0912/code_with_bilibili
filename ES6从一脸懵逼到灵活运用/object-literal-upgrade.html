@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>object-literal-upgrade</title>
+  </head>
+  <body>
+    <script>
+      const name = "Jack";
+      const age = 20;
+      const birthday = "2010-9";
+
+      const Jack = {
+        // 原方法
+        name: name,
+        age: age,
+        birthday: birthday,
+        getName: function() {}
+      };
+      const Jack2 = {
+        // ES6 属性简写（1）
+        name,
+        age,
+        birthday,
+        getName() {} // ES6 方法简写（2）
+      };
+
+      let id = 0;
+      userIds[`user-${++id}`] = id;
+      const userIds = {
+        // 原方法
+        "user-1": 1,
+        "user-2": 2
+      };
+
+      const userIds2 = {
+        // 使用 ES6 的计算属性简写（3）
+        [`user-${++id}`]: id,
+        [`user-${++id}`]: id,
+        [`user-${++id}`]: id
+      };
+
+      const keys = ["name", "age", "birthday"];
+      const values = ["Jack", 20, "2010-9"];
+
+      const Jack3 = {
+        // 原方法
+        [keys[0]]: values[0],
+        [keys[1]]: values[1],
+        [keys[2]]: values[2]
+      };
+
+      const Jack4 = {
+        // ES6 方法
+        [keys.shift()]: values.shift(),
+        [keys.shift()]: values.shift(),
+        [keys.shift()]: values.shift()
+      };
+    </script>
+  </body>
+</html>
