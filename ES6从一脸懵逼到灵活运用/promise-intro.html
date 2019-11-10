@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>promise-intro</title>
+  </head>
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.min.js"></script>
+    <script>
+      let user;
+      // ajax 请求返回的顺序是不定的
+      //   $.get("http://api.github.com/users", data => {
+      //     console.log("fetched all users");
+      //     user = data[0].login;
+      //     $.get(`https://api.github.com/users/${user}/repos`, data => {
+      //       console.log("fetched user repos");
+      //       console.log(data);
+      //     });
+      //   });
+
+      // 解决回调地狱：ES6 的 promise
+      const usersPromise = axios.get("http://api.github.com/users");
+
+      usersPromise
+        .then(res => {
+          user = res.data[0].login;
+          return axios.get(`https://api.github.com/users/${user}/repos`);
+        })
+        .then(res => {
+          console.log(res.data);
+        })
+        .catch(err => { // 监听错误
+          console.log(err);
+        });
+    </script>
+  </body>
+</html>
