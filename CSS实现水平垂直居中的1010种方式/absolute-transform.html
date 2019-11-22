@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>absolute + transform</title>
+    <style>
+      .parent {
+        border: 1px solid red;
+        width: 300px;
+        height: 300px;
+        text-align: center;
+        margin: 20px;
+
+        position: relative;
+      }
+      .child {
+        background: greenyellow;
+        text-align: center;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .child.size {
+        width: 100px;
+        height: 100px;
+      }
+      img {
+        width: 300px;
+        height: auto;
+      }
+      h4 {
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="parent">
+      <h2>parent</h2>
+      <div class="child size"><h2>child</h2></div>
+    </div>
+    <h4>兼容性依赖translate2d的兼容性，缺点是需要知道子元素的宽高</h4>
+    <div class="parent">
+      <img src="absolute-transform.png" />
+    </div>
+  </body>
+</html>
