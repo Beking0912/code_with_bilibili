@@ -9,15 +9,17 @@ Array.prototype.filter = function(callbackfn, thisArg) {
   }
   let O = Object(this);
   let len = O.length >>> 0;
+
   let resLen = 0;
-  let res = [];
-  for (let i = 0; i < len; i++) {
-    if (i in O) {
-      let element = O[i];
-      if (callbackfn.call(thisArg, O[i], i, O)) {
-        res[resLen++] = element;
+  let Ary = [];
+  
+  for (let k = 0; k < len; k++) {
+    if (k in O) {
+      let element = O[k];
+      if (callbackfn.call(thisArg, O[k], k, O)) {
+        Ary[resLen++] = element;
       }
     }
   }
-  return res;
+  return Ary;
 };
