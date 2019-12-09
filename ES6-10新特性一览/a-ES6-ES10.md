@@ -9,3 +9,8 @@
 - [对象属性简写](ES6-objectAbbreviation.js)
 - [Promise](ES6-Promise.js)
 - [let const](ES6-let-const.js)
+
+## ES7
+- [Array.prototype.includes()](ES7-Array.prototype.includes().js)
+- [**](ES7-**.js)
+
