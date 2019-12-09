@@ -1,0 +1,11 @@
+## ES6
+- [类(class)](ES6-class.js)
+- [模块化(Module)](ES6-module.js)
+- [箭头函数(arrow)](ES6-arrow.js)
+- [函数参数默认值](ES6-defaultValue.js)
+- [模版字符串](ES6-templateString.js)
+- [解构赋值](ES6-deconstruct.js)
+- [扩展运算符](ES6-spreadOperator.js)
+- [对象属性简写](ES6-objectAbbreviation.js)
+- [Promise](ES6-Promise.js)
+- [let const](ES6-let-const.js)
