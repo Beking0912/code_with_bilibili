@@ -7,7 +7,7 @@
  *  3. 特殊数据，比如 'proto'，因为对象的 proto 属性无法被重写
  */
 
-// 解决1和3
+// 解决问题1和3
 Array.prototype.unique = function() {
   const newArray = [];
   const tmp = {};
@@ -20,7 +20,7 @@ Array.prototype.unique = function() {
   return newArray;
 };
 
-// 解决2
+// 解决问题2
 Array.prototype.unique2 = function() {
   const newArray = [];
   const tmp = {};
@@ -32,4 +32,20 @@ Array.prototype.unique2 = function() {
     }
   }
   return newArray;
+};
+
+// 单纯，以上三个问题都出现
+Array.prototype.unique3 = function(arr) {
+  const tmp = {};
+  return arr.filter(function(item, index, array) {
+    return tmp.hasOwnProperty(item) ? false : (obj[item] = true);
+  });
+};
+
+// 解决问题1
+Array.prototype.unique4 = function() {
+  const tmp = {};
+  return arr.filter(function(item, index, array) {
+    return tmp.hasOwnProperty(typeof item + item) ? false : (obj[typeof item + item] = true);
+  });
 };
