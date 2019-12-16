@@ -14,3 +14,21 @@
 - [Array.prototype.includes()](ES7-Array.prototype.includes().js)
 - [**](ES7-**.js)
 
+## ES8
+- [async/await](ES8-async-await.js)
+- [Object.values()](ES8-Object.values().js)
+- [Object.entries()](ES8-Object.entries().js)
+- [函数参数列表结尾允许逗号]()
+- [String padding: padStart()和padEnd()](ES8-String-padding.js)
+- [Object.getOwnPropertyDescriptors()](ES8-Object.getOwnPropertyDescriptors().js)
+- [Atomics对象](ES8-Atomics.js)
+
+## ES9
+- [异步迭代](ES9-async-iterators.js)
+- [Promise.finally()](ES9-Promise.finally().js)
+- [Rest/Spread](ES9-rest-spread.js)
+- [正则表达式命名捕获组（Regular Expression Named Capture Groups）](ES9-exec.js)
+- [正则表达式反向断言（lookbehind）](ES9-lookbehind.js)
+- [正则表达式dotAll模式](ES9-dotAll.js)
+- [正则表达式Unicode转义](ES9-Unicode.js)
+- [非转义序列的模板字符串](ES9-templateString.js)
