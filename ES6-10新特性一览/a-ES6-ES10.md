@@ -32,3 +32,19 @@
 - [正则表达式dotAll模式](ES9-dotAll.js)
 - [正则表达式Unicode转义](ES9-Unicode.js)
 - [非转义序列的模板字符串](ES9-templateString.js)
+
+## ES10
+- [行分隔符（U + 2028）和段分隔符（U + 2029）符号现在允许在字符串文字中，与JSON匹配]()
+- [JSON.stringify为超出范围的字符输出转义序列]()
+- [新增Array的flat()和flatMap()](ES10-flat-flatMap.js)
+- [新增String的trimStart()和trimEnd()]
+- [Object.fromEntries()](ES10-Object.fromEntries().js)
+- [Symbol.prototype.description](ES10-Symbol-description.js)
+- [String.prototype.matchAll](ES10-String-matchAll.js)
+- [Function.prototype.toString()返回精确字符]
+- [简化try {} catch {},修改 catch 绑定]
+- [新的基本数据类型BigInt]
+- [globalThis]
+- [import()]
+- [Legacy RegEx]
+- [私有的实例方法和访问器]
