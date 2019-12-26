@@ -41,7 +41,7 @@
 - [Object.fromEntries()](ES10-Object.fromEntries().js)
 - [Symbol.prototype.description](ES10-Symbol-description.js)
 - [String.prototype.matchAll](ES10-String-matchAll.js)
-- [Function.prototype.toString()返回精确字符]
+- [Function.prototype.toString()返回精确字符](ES10-toString().js)
 - [简化try {} catch {},修改 catch 绑定]
 - [新的基本数据类型BigInt]
 - [globalThis]
