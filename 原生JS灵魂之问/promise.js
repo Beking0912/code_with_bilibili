@@ -7,7 +7,7 @@ class Promise {
     //=>执行Excutor
     let resolveFn = result => {
       if (this.status !== "pending") return;
-      let timer = setTimeout(() => {
+      setTimeout(() => {
         this.status = "fulfilled";
         this.value = result;
         this.fulfillAry.forEach(item => item(this.value));
@@ -15,7 +15,7 @@ class Promise {
     };
     let rejectFn = reason => {
       if (this.status !== "pending") return;
-      let timer = setTimeout(() => {
+      setTimeout(() => {
         this.status = "rejected";
         this.value = reason;
         this.rejectedAry.forEach(item => item(this.value));
