@@ -7,7 +7,7 @@ class Element {
   }
 }
 // 设置属性
-function serAttr(node, key, value) {
+function setAttr(node, key, value) {
   switch (key) {
     case "value":
       if (
@@ -35,7 +35,7 @@ function createElement(type, props, children) {
 function render(eleObj) {
   let el = document.createElement(eleObj.type);
   for (let key in eleObj.props) {
-    serAttr(el, key, eleObj.props[key]);
+    setAttr(el, key, eleObj.props[key]);
   }
   // 遍历子节点 若是虚拟dom则继续渲染 否则代表文本节点
   eleObj.children.forEach(child => {
@@ -49,4 +49,4 @@ function render(eleObj) {
 function renderDom(el, target) {
   target.appendChild(el);
 }
-export { createElement, render, Element, renderDom };
+export { createElement, setAttr, render, Element, renderDom }
