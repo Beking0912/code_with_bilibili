@@ -10,6 +10,12 @@
         background-color: aquamarine;
         position: absolute;
       }
+      #box2 {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        margin-left: 200px;
+      }
     </style>
     <script type="text/javascript">
       window.onload = function() {
@@ -20,10 +26,13 @@
          */
 
         var box1 = document.getElementById("box1");
-        box1.onmousedown = function() {
+        box1.onmousedown = function(event) {
+          var ol = event.clientX - box1.offsetLeft;
+          var ot = event.clientY - box1.offsetTop;
+
           document.onmousemove = function(event = window.event) {
-            var left = event.clientX;
-            var top = event.clientY;
+            var left = event.clientX - ol;
+            var top = event.clientY - ot;
 
             box1.style.left = left + "px";
             box1.style.top = top + "px";
@@ -39,5 +48,6 @@
   </head>
   <body>
     <div id="box1"></div>
+    <div id="box2"></div>
   </body>
 </html>
