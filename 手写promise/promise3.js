@@ -100,7 +100,7 @@ function resolvePromise(promise2, x, resolve, reject) {
   if (promise2 === x) {
     return reject(new TypeError("循环引用"));
   }
-  if (typeof x === "function" || typeof x === "object") {
+  if ((typeof x === "function" || typeof x === "object") && x !== null) {
     try {
       let then = x.then;
       if (typeof then === "function") {
