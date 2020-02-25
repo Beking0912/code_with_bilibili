@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            font-family:Arial, "Microsoft YaHei";
+        }
+        .contain{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .input{
+            margin-top: 100px;
+            height: 36px;
+            width: 600px;
+            font-size: 26px;
+            border-radius: 5rem;
+            padding-left: 10px;
+        }
+        .input:hover{
+            box-shadow: 0 3px 5px rgba(0,0,0,0.3);
+        }
+        .button{
+            height: 36px;
+        }
+        .tips{
+            color: chocolate;
+        }
+        .result{
+            margin-top: 40px;
+            display: flex;
+            flex-direction: row;
+        }
+        .sentence{
+            font-size: 24px;
+            margin: 3px;
+        }
+        .line, .only{
+            height: 20px;
+        }
+        .word{
+            display: flex;
+            flex-direction: column;
+        }
+        .first{
+            border-width: 1px;
+            border-left: tomato;
+        }
+        .only{
+            /* border-style: solid;
+            border-width: thin;
+            border-top: white; */
+        }
+    </style>
+    <!-- <script type="text/javascript">
+        let result = '{{result.phrase}}';
+        console.log(result);
+    </script> -->
+</head>
+<body>
+    <div class="contain">
+    {% if result and sentence %}
+        <form action="/search" method="POST">
+            <input class="input" type="text" name='sentence' value="{{sentence}}" placeholder="please input the sentence">
+            <button class="button" type="submit" >识别</button>
+        </form>
+
+        <div class="result">
+            {% for letter in result.sentence.split() %}
+            <div class="word">
+                <span class="sentence" style="background-color: gold;">{{letter}}</span>
+                {% for item in result.phrase %}
+                    {% if letter in item[0] %}
+                        {% if item[0][0] == letter %}
+                            {% if item[4] == 1 %}
+                            <span class="only">only</span>
+                            {% else %}
+                            <span class="line">first</span>
+                            {% endif %}
+                        {% endif %}
+                        {% if item[0][-1] == letter %}
+                            {% if item[4] != 1 %}
+                            <span class="line, last">last</span>
+                            {%endif%}
+                        {% else %}
+                        <span class="line, mid">mid</span>
+                        {% endif %}
+                    {% else %}
+                    <span class="line" style="background-color: white;"></span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    
+    {% else %}
+        <form action="/search" method="POST">
+            <input class="input" type="text" name='sentence' placeholder="please input the sentence">
+            <button class="button" type="submit" >识别</button>
+        </form>
+        {% if tips %}
+        <div class="tips">{{tips}}</div>
+        {% endif %}
+    {% endif %}
+    </div>
+    
+</body>
+</html>
