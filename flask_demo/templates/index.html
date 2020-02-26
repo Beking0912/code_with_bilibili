@@ -3,10 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>张凯毕设</title>
     <style>
       * {
-        font-family: Arial, "Microsoft YaHei";
+        font-family: Montserrat, sans-serif, Arial, "Microsoft YaHei";
+      }
+      .title{
+        display: flex;
+        justify-content: center;
+        text-shadow:#000 1px 0 0,#000 0 1px 0,#000 -1px 0 0,#000 0 -1px 0;  
+        font-size: 60px;
+        font-weight :bold;
+        color:white;
       }
       .contain {
         display: flex;
@@ -14,30 +22,51 @@
         align-items: center;
         flex-direction: column;
       }
-      .input {
-        margin-top: 100px;
-        height: 36px;
-        width: 600px;
-        font-size: 26px;
-        border-radius: 5rem;
-        padding-left: 10px;
+      .form {
+        width: 80%;
+        margin-top: 24px;
+        border-radius: 20px;
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
       }
-      .input:hover {
+      .input {
+        width: 100%;
+        height: 200px;
+        font-size: 24px;
+        padding-left: 24px;
+        padding-top: 16px;
+        border: 0;
+        outline: none;
+        resize: none;
+      }
+      .form:hover {
         box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
       }
       .button {
-        height: 36px;
+        font-size: 22px;
+        height: 50px;
+        border-radius: 5rem;
+        border: 0;
+        outline: none;
+        padding-right: 16px;
+        cursor: pointer;
       }
       .tips {
         color: chocolate;
       }
       .result {
+        width: 80%;
         margin-top: 40px;
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap
       }
       .sentence {
-        font-size: 24px;
+        font-size: 28px;
         margin: 3px;
       }
       .empty,
@@ -84,38 +113,64 @@
         font-size: 13px;
         margin-top: 6px;
       }
+      .others{
+        display: flex; 
+        justify-content: center;
+      }
+      .tables{
+        margin-top: 60px;
+        width: 80%;
+        background: #34495E;
+        color: #fff;
+        border-radius: .4em;
+        overflow: hidden;
+      }
+      th, td {
+        min-width: 60px;
+      }
+      th{
+        color: yellow;
+        font-size: 20px;
+        font-weight: bold;
+      }
+      tr:hover{
+        background-color: rgb(26, 27, 29);
+      }
+      .one{
+        text-align: center;
+      }
     </style>
   </head>
 
   <body>
+    <div class="title">张凯的毕设写完啦</div>
     <div class="contain">
+      <form action="/search" method="POST" class="form">
+        <textarea
+          class="input"
+          type="text"
+          name="sentence"
+          placeholder="please input the sentence"
+        >{{sentence}}</textarea>
+        <button class="button" type="submit">🔍</button>
+      </form>
       {% if result and sentence %}
-      <form action="/search" method="POST">
-        <input
-          class="input"
-          type="text"
-          name="sentence"
-          value="{{sentence}}"
-          placeholder="please input the sentence"
-        />
-        <button class="button" type="submit">识别</button>
-      </form>
-      <div class="result" id="result">
-      </div>
-
-      {% else %}
-      <form action="/search" method="POST">
-        <input
-          class="input"
-          type="text"
-          name="sentence"
-          placeholder="please input the sentence"
-        />
-        <button class="button" type="submit">识别</button>
-      </form>
-      {% if tips %}
+      <div class="result" id="result"></div>
+      {% endif %} {% if tips %}
       <div class="tips">{{tips}}</div>
-      {% endif %} {% endif %}
+      {% endif %}
+    </div>
+    <div class="others">
+      <table class="tables">
+        <tr><th>Type</th><th>Explanation</th><th>Subtypes</th></tr>
+        <tr><td class="one">FAC</td><td>Facility</td><td>Airport, Building-Grounds, Path, Plant, Subarea-Facility</td></tr>
+        <tr><td class="one">GPE</td><td>Geo-Political Entity3</td><td>Continent, County-or-District, GPE-Cluster, Nation, Population-Center, Special, State-or-Province</td></tr>
+        <tr><td class="one">LOC</td><td>Location</td><td>Address, Boundary, Celestial, Land-Region-Natural, Region-General, Region-International, Water-Body</td></tr>
+        <tr><td class="one">ORG</td><td>Organization</td><td>Commercial, Educational, Entertainment, Government, Media, Medical-Science, Non-Governmental, Religious, Sports</td></tr>
+        <tr><td class="one">PER</td><td>Person</td><td>Group, Indeterminate, Individual</td></tr>
+        <tr><td class="one">VEH</td><td>Vehicle</td><td>Air, Land, Subarea-Vehicle, Underspecified, Water</td></tr>
+        <tr><td class="one">WEA</td><td>Weapon</td><td>Biological, Blunt, Chemical, Exploding, Nuclear, Projectile, Sharp, Shooting, Underspecified</td></tr>
+      </table>
     </div>
   </body>
   <script type="text/javascript">
@@ -138,7 +193,7 @@
         for(let ss = start; ss < end; ss += 1) {
             let pos, showLabel = false;
             if ( start + 1 === end) pos = 'only';
-            else if (ss - start === 0) pos = 'first'; 
+            else if (ss - start === 0) pos = 'first';
             else if (ss === end-1) pos = 'last';
             else pos = 'mid';
 
