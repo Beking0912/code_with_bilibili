@@ -1,145 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-        *{
-            font-family:Arial, "Microsoft YaHei";
-        }
-        .contain{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        .input{
-            margin-top: 100px;
-            height: 36px;
-            width: 600px;
-            font-size: 26px;
-            border-radius: 5rem;
-            padding-left: 10px;
-        }
-        .input:hover{
-            box-shadow: 0 3px 5px rgba(0,0,0,0.3);
-        }
-        .button{
-            height: 36px;
-        }
-        .tips{
-            color: chocolate;
-        }
-        .result{
-            margin-top: 40px;
-            display: flex;
-            flex-direction: row;
-        }
-        .sentence{
-            font-size: 24px;
-            margin: 3px;
-        }
-        .empty, .only, .first, .mid, .last{
-            height: 5px;
-            margin-bottom: 12px;
-        }
-        .empty{
-            border-width: 2px;
-            border-color: white;
-            margin-bottom: 2px;
-            height: 17px;
-        }
-        .word{
-            display: flex;
-            flex-direction: column;
-        }
-        .first{
-            border-style: solid;
-            border-width: 0 0 2px 2px;
-            border-color: tomato;
-        }
-        .only{
-            border-style: solid;
-            border-width: 0 2px 2px 2px;
-            border-color: teal;
-        }
-        .last{
-            border-style: solid;
-            border-width: 0 2px 2px 0;
-            border-color: tomato;
-        }
-        .mid{
-            border-style: solid;
-            border-width: 0 0 2px 0;
-            border-color: tomato;
-        }
-        .inside{
-            display: flex;
-            justify-content: center;   
-            font-size: 13px;
-            margin-top: 6px;
-        }
+      * {
+        font-family: Arial, "Microsoft YaHei";
+      }
+      .contain {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      .input {
+        margin-top: 100px;
+        height: 36px;
+        width: 600px;
+        font-size: 26px;
+        border-radius: 5rem;
+        padding-left: 10px;
+      }
+      .input:hover {
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+      }
+      .button {
+        height: 36px;
+      }
+      .tips {
+        color: chocolate;
+      }
+      .result {
+        margin-top: 40px;
+        display: flex;
+        flex-direction: row;
+      }
+      .sentence {
+        font-size: 24px;
+        margin: 3px;
+      }
+      .empty,
+      .only,
+      .first,
+      .mid,
+      .last {
+        height: 5px;
+        margin-bottom: 12px;
+      }
+      .empty {
+        border-width: 2px;
+        border-color: white;
+        margin-bottom: 2px;
+        height: 17px;
+      }
+      .word {
+        display: flex;
+        flex-direction: column;
+      }
+      .first {
+        border-style: solid;
+        border-width: 0 0 2px 2px;
+        border-color: tomato;
+      }
+      .only {
+        border-style: solid;
+        border-width: 0 2px 2px 2px;
+        border-color: teal;
+      }
+      .last {
+        border-style: solid;
+        border-width: 0 2px 2px 0;
+        border-color: tomato;
+      }
+      .mid {
+        border-style: solid;
+        border-width: 0 0 2px 0;
+        border-color: tomato;
+      }
+      .inside {
+        display: flex;
+        justify-content: center;
+        font-size: 13px;
+        margin-top: 6px;
+      }
     </style>
-</head>
-<body>
+  </head>
+
+  <body>
     <div class="contain">
-    {% if result and sentence %}
-        <form action="/search" method="POST">
-            <input class="input" type="text" name='sentence' value="{{sentence}}" placeholder="please input the sentence">
-            <button class="button" type="submit" >识别</button>
-        </form>
-        <div class="result">
-            {% for letter in result.sentence.split() %}
-            <div class="word">
-                <span class="sentence">{{letter}}</span>
-                {% for item in result.phrase %}
-                    {% if letter in item[0] %}
-                        {% if item[0][0] == letter %}
-                            {% if item[4] == 1 %}
-                            <span class="only"><p class="inside">{{item[1]}}</p></span>
-                            {% else %}
-                            <span class="first"></span>
-                            {% endif %} 
-                        {% endif %}
-                        {% if item[0][-1] == letter %}
-                            {% if item[4] > 2%}
-                            <span class="last"></span>
-                            {% else %}
-                                {% if item[4] == 2 %}
-                                <span class="last"><p class="inside">{{item[1]}}</p></span>
-                                {% endif %}
-                            {% endif %}
-                        {% endif %}
-                        {% if letter in item[0][1:-1] %}
-                            {% if item[4]%2 == 1 and item[0][item[4]//2] == letter %}
-                            <span class="mid"><p class="inside">{{item[1]}}</p></span>
-                            {% else %}
-                                {% if item[4]%2 == 0 and item[0][item[4]//2] == letter %}
-                                <span class="mid"><p class="inside">{{item[1]}}</p></span>
-                                {% else %}
-                                <span class="mid"></span>
-                                {% endif %}
-                            {% endif %}
-                        {% endif %}
-                    {% else %}
-                    <span class="empty" style="background-color: white;"></span>
-                    {% endif %}
-                {% endfor %}
-            </div>
-            {% endfor %}
-        </div>
-    
-    {% else %}
-        <form action="/search" method="POST">
-            <input class="input" type="text" name='sentence' placeholder="please input the sentence">
-            <button class="button" type="submit" >识别</button>
-        </form>
-        {% if tips %}
-        <div class="tips">{{tips}}</div>
-        {% endif %}
-    {% endif %}
+      {% if result and sentence %}
+      <form action="/search" method="POST">
+        <input
+          class="input"
+          type="text"
+          name="sentence"
+          value="{{sentence}}"
+          placeholder="please input the sentence"
+        />
+        <button class="button" type="submit">识别</button>
+      </form>
+      <div class="result" id="result">
+      </div>
+
+      {% else %}
+      <form action="/search" method="POST">
+        <input
+          class="input"
+          type="text"
+          name="sentence"
+          placeholder="please input the sentence"
+        />
+        <button class="button" type="submit">识别</button>
+      </form>
+      {% if tips %}
+      <div class="tips">{{tips}}</div>
+      {% endif %} {% endif %}
     </div>
-    
-</body>
+  </body>
+  <script type="text/javascript">
+    let positions = {{result|tojson}};
+    let words = {{result.sentence|tojson}};
+    class Word {
+        labels = [];
+        constructor(word) {
+            this.word = word;
+        }
+    }
+
+    const Words = [];
+    for(let i = 0; i < words.length; i += 1) {
+        Words.push(new Word(words[i], 0, 0));
+    }
+    for(let i = 0; i < positions.phrase.length; i += 1) {
+        const phrase = positions.phrase[i];
+        const [ _, label, start, end, level] = phrase;
+        for(let ss = start; ss < end; ss += 1) {
+            let pos, showLabel = false;
+            if ( start + 1 === end) pos = 'only';
+            else if (ss - start === 0) pos = 'first'; 
+            else if (ss === end-1) pos = 'last';
+            else pos = 'mid';
+
+            if(Math.floor((start+end)/2) === ss) showLabel = true;
+
+            Words[ss].labels.push({
+                level,
+                label,
+                pos,
+                showLabel,
+            });
+        }
+    }
+
+    function newEmpty() {
+        const emptyDom = document.createElement("span");
+        emptyDom.className = "empty";
+        return emptyDom;
+    }
+
+    const colors = {
+        PER: 'Peru',
+        FAC: 'DodgerBlue',
+        ORG: 'green',
+        GPE: 'BlueViolet',
+        LOC: 'Darkorange',
+        VEH: 'red',
+        WEA: 'black',
+    }
+
+    function newLevel(label) {
+        const onlyDom = document.createElement("span");
+        onlyDom.className = label.pos;
+        onlyDom.style.borderColor = colors[label.label];
+        if (label.showLabel) {
+            const k = document.createElement("p");
+            k.className = 'inside';
+            k.innerText = label.label;
+            k.style.color = colors[label.label];
+            onlyDom.appendChild(k);
+        }
+        return onlyDom;
+    }
+
+    for(let j = 0; j < Words.length; j += 1) {
+        const word = Words[j];
+        const resultDom = document.getElementById("result");
+        const wordDom = document.createElement("div");
+        wordDom.className = "word";
+        const letterDom = document.createElement("span");
+        letterDom.className = "sentence";
+        letterDom.innerText = word.word;
+
+        wordDom.appendChild(letterDom);
+        const maxLevel = word.labels.reduce((value, current) => {return value<current.level ? current.level : value}, 0);
+        for( let i = 1; i <= maxLevel; i += 1) {
+            const [label] = word.labels.filter((value) => {return value.level === i});
+            if (label) {
+                wordDom.appendChild(newLevel(label));
+            }else {
+                wordDom.appendChild(newEmpty());
+            }
+        }
+        resultDom.appendChild(wordDom);
+    }
+  </script>
 </html>
