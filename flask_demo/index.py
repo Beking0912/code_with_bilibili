@@ -7,7 +7,6 @@ app = Flask(__name__)
 def hello():
     return render_template('index.html')
 
-
 @app.route('/search', methods=['POST'])
 def search():
     sentence = request.form.get("sentence")
@@ -19,11 +18,13 @@ def search():
         "len": 5,
         # phrase label start end nested_level
         "phrase": [(["beking"], "PER", 3, 4, 1),
-                   (["is", "beking"], "PER", 2, 4, 2),
+                #    (["is", "beking"], "PER", 2, 4, 2),
                    (["name"], "ORG", 1, 2, 1),
-                   (["my", "name"], "ORG", 0, 2, 2),
-                   (["my", "name", "is", "beking"], "FAC", 0, 4, 3)]
+                #    (["my", "name"], "ORG", 0, 2, 2),
+                   (["my", "name", "is"], "FAC", 0, 3, 3)]
     }
+
+    
     
     return render_template('index.html', result=result, sentence=sentence)
 

@@ -40,27 +40,47 @@
             font-size: 24px;
             margin: 3px;
         }
-        .line, .only{
-            height: 20px;
+        .empty, .only, .first, .mid, .last{
+            height: 5px;
+            margin-bottom: 12px;
+        }
+        .empty{
+            border-width: 2px;
+            border-color: white;
+            margin-bottom: 2px;
+            height: 17px;
         }
         .word{
             display: flex;
             flex-direction: column;
         }
         .first{
-            border-width: 1px;
-            border-left: tomato;
+            border-style: solid;
+            border-width: 0 0 2px 2px;
+            border-color: tomato;
         }
         .only{
-            /* border-style: solid;
-            border-width: thin;
-            border-top: white; */
+            border-style: solid;
+            border-width: 0 2px 2px 2px;
+            border-color: teal;
+        }
+        .last{
+            border-style: solid;
+            border-width: 0 2px 2px 0;
+            border-color: tomato;
+        }
+        .mid{
+            border-style: solid;
+            border-width: 0 0 2px 0;
+            border-color: tomato;
+        }
+        .inside{
+            display: flex;
+            justify-content: center;   
+            font-size: 13px;
+            margin-top: 6px;
         }
     </style>
-    <!-- <script type="text/javascript">
-        let result = '{{result.phrase}}';
-        console.log(result);
-    </script> -->
 </head>
 <body>
     <div class="contain">
@@ -69,29 +89,41 @@
             <input class="input" type="text" name='sentence' value="{{sentence}}" placeholder="please input the sentence">
             <button class="button" type="submit" >识别</button>
         </form>
-
         <div class="result">
             {% for letter in result.sentence.split() %}
             <div class="word">
-                <span class="sentence" style="background-color: gold;">{{letter}}</span>
+                <span class="sentence">{{letter}}</span>
                 {% for item in result.phrase %}
                     {% if letter in item[0] %}
                         {% if item[0][0] == letter %}
                             {% if item[4] == 1 %}
-                            <span class="only">only</span>
+                            <span class="only"><p class="inside">{{item[1]}}</p></span>
                             {% else %}
-                            <span class="line">first</span>
-                            {% endif %}
+                            <span class="first"></span>
+                            {% endif %} 
                         {% endif %}
                         {% if item[0][-1] == letter %}
-                            {% if item[4] != 1 %}
-                            <span class="line, last">last</span>
-                            {%endif%}
-                        {% else %}
-                        <span class="line, mid">mid</span>
+                            {% if item[4] > 2%}
+                            <span class="last"></span>
+                            {% else %}
+                                {% if item[4] == 2 %}
+                                <span class="last"><p class="inside">{{item[1]}}</p></span>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                        {% if letter in item[0][1:-1] %}
+                            {% if item[4]%2 == 1 and item[0][item[4]//2] == letter %}
+                            <span class="mid"><p class="inside">{{item[1]}}</p></span>
+                            {% else %}
+                                {% if item[4]%2 == 0 and item[0][item[4]//2] == letter %}
+                                <span class="mid"><p class="inside">{{item[1]}}</p></span>
+                                {% else %}
+                                <span class="mid"></span>
+                                {% endif %}
+                            {% endif %}
                         {% endif %}
                     {% else %}
-                    <span class="line" style="background-color: white;"></span>
+                    <span class="empty" style="background-color: white;"></span>
                     {% endif %}
                 {% endfor %}
             </div>
